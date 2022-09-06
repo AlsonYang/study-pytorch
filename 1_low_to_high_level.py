@@ -77,7 +77,7 @@ def train_with_auto_grad_loss_optimizer(x, y, w):
     '''4) torch only'''
     t_loss = torch.nn.MSELoss()
     t_optimizer = torch.optim.SGD([w], lr=LEARNING_RATE)
-    for epoch in range(N_EPOCH):
+    for epoch in range(1, N_EPOCH + 1):
         # 1) forward
         y_pred = forward(x, w)
 
@@ -90,7 +90,7 @@ def train_with_auto_grad_loss_optimizer(x, y, w):
         t_optimizer.zero_grad() # clear grad accumulator
         
         # x) logging
-        if epoch % PRINT_EVERY_NTH == 0:
+        if (epoch+1) % PRINT_EVERY_NTH == 0:
             print(f'epoch: {epoch}, w: {w:.3f}, loss: {l: .8f}')
     return w
 
