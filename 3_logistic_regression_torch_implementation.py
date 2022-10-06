@@ -1,3 +1,9 @@
+'''
+Compare to 2_*.py
+- Linear regression -> Logistic regression
+- StandardScaler for input featuers
+'''
+
 import torch 
 import torch.nn as nn
 import numpy as np
@@ -5,7 +11,6 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-#===step 0: get data ready===
 # seed
 SEED = 42
 torch.manual_seed(SEED)
@@ -17,6 +22,7 @@ PRINT_EVERY_NTH = 10
 LEARNING_RATE = 0.01
 N_EPOCH = 200
 
+#===step 0: get data ready===
 # get data
 bc = datasets.load_breast_cancer()
 X, y = bc.data, bc.target
@@ -26,9 +32,9 @@ print(X.shape, y.shape)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # scale: without scaling, the model doesn't learn at all, probably because the value Z are too big given X, and so gradient of activation is 0 # Important!!!
-sc = StandardScaler()
-X_train = sc.fit_transform(X_train)
-X_test = sc.transform(X_test)
+ss = StandardScaler()
+X_train = ss.fit_transform(X_train)
+X_test = ss.transform(X_test)
 
 # convert to torch.tensor
 X_train = torch.from_numpy(X_train.astype(np.float32))
@@ -57,11 +63,11 @@ model = LogisticRegression(in_features=in_features)
 
 #===step 2: set up criterion and optimizer===
 criterion = nn.BCELoss()
-# optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
-optimizer = torch.optim.SGD(model.parameters(), lr=LEARNING_RATE)
+optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
+# optimizer = torch.optim.SGD(model.parameters(), lr=LEARNING_RATE)
 
 #===step 3: training===
-for epoch in range(1, N_EPOCH + 1):
+for epoch in range(N_EPOCH):
     # forward
     y_pred = model(X_train)
     l = criterion(y_pred, y_train)
@@ -74,9 +80,9 @@ for epoch in range(1, N_EPOCH + 1):
     optimizer.zero_grad()
 
     # logging 
-    if epoch % PRINT_EVERY_NTH == 0:
+    if (epoch + 1) % PRINT_EVERY_NTH == 0:
         (w, b) = model.parameters()
-        print(f'epoch: {epoch}, loss: {l: .8f}, b: {b.item(): .4f}')
+        print(f'epoch: {epoch + 1}, loss: {l: .8f}, b: {b.item(): .4f}')
 
 #===step 4: eval===
 with torch.no_grad():

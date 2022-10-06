@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/yangj2/Desktop/personal/pytorch/mlruns/1/58e9ad49731d47449b882e9f1995a0ed/artifacts
+end_time: 1665036093622
+entry_point_name: ''
+experiment_id: '1'
+lifecycle_stage: active
+name: ''
+run_id: 58e9ad49731d47449b882e9f1995a0ed
+run_uuid: 58e9ad49731d47449b882e9f1995a0ed
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1665036092638
+status: 4
+tags: []
+user_id: yangj2

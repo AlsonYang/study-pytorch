@@ -37,7 +37,7 @@ loss = torch.nn.MSELoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=LEARNING_RATE)
 
 #===training===
-for epoch in range(1, N_EPOCH + 1):
+for epoch in range(N_EPOCH):
     # forward
     y_pred = model(x)
 
@@ -50,11 +50,11 @@ for epoch in range(1, N_EPOCH + 1):
     optimizer.zero_grad()
 
     # x) logging 
-    if epoch % PRINT_EVERY_NTH == 0:
+    if (epoch + 1) % PRINT_EVERY_NTH == 0:
         (w, b) = model.parameters()
         print(l)
         print(type(l))
-        print(f'epoch: {epoch}, w: {w.item():.3f}, b: {b.item():.3f} loss: {l: .8f}')
+        print(f'epoch: {epoch + 1}, w: {w.item():.3f}, b: {b.item():.3f} loss: {l: .8f}')
 
 #===viz after training===
 print([model.parameters()])

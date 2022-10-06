@@ -1,0 +1,6 @@
+artifact_location: file:///Users/yangj2/Desktop/personal/pytorch/mlruns/1
+creation_time: 1665022756530
+experiment_id: '1'
+last_update_time: 1665022756530
+lifecycle_stage: active
+name: MNIST-MLP
